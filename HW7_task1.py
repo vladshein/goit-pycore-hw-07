@@ -82,6 +82,13 @@ class Record:
                 return phone
             else:
                 return None
+    
+    def show_all_phones(self):
+        if not self.phones:
+            print("List of phones is empty")
+        else:
+            print(f"phones: {'; '.join(p.value for p in self.phones)}")
+
 
 # create address book         
 class AddressBook(UserDict):
@@ -89,7 +96,7 @@ class AddressBook(UserDict):
     def add_record(self, record):
         self.data[record.name] = record
 
-    #need to check functionality
+    #find record by name
     def find(self, name):
         for key in self.data.keys():
             if key.value == name:
@@ -140,58 +147,62 @@ class AddressBook(UserDict):
         print(congrats_list)
         return congrats_list
 
-#test data
-# Створення запису для john
-john_record = Record("John")
-jane_record = Record("Jane")
+def main():
+    #test data
+    # Створення запису для john
+    john_record = Record("John")
+    jane_record = Record("Jane")
 
-#add johns phones
-john_record.add_phone("1234567890")
-john_record.add_phone("5555555555")
-john_record.add_phone("3333333333")
-john_record.add_phone("7777777777")
+    #add johns phones
+    john_record.add_phone("1234567890")
+    john_record.add_phone("5555555555")
+    john_record.add_phone("3333333333")
+    john_record.add_phone("7777777777")
 
-#add janes phones
-jane_record.add_phone("2223332222")
-jane_record.add_phone("1112221111")
+    #add janes phones
+    jane_record.add_phone("2223332222")
+    jane_record.add_phone("1112221111")
 
-print(jane_record)
-print(john_record)
+    print(jane_record)
+    print(john_record)
 
-#add birthdays 
-bd_john = "01.08.2022"
-john_birthday = Birthday(bd_john)
-john_record.add_birthday(john_birthday)
+    #add birthdays 
+    bd_john = "01.08.2022"
+    john_birthday = Birthday(bd_john)
+    john_record.add_birthday(john_birthday)
 
-bd_jane = "02.09.1999"
-jane_birthday = Birthday(bd_jane)
-jane_record.add_birthday(jane_birthday)
-#print record and birthday
-print(john_record)
-print(jane_record)
+    bd_jane = "02.09.1999"
+    jane_birthday = Birthday(bd_jane)
+    jane_record.add_birthday(jane_birthday)
+    #print record and birthday
+    print(john_record)
+    print(jane_record)
 
-found_phone = john_record.find_phone("1234567890")
+    found_phone = john_record.find_phone("1234567890")
 
-john_record.edit_phone("1234567890", "2345678901")
-print(john_record)
+    john_record.edit_phone("1234567890", "2345678901")
+    print(john_record)
 
-john_record.remove_phone("3333333333")
-print(john_record)
+    john_record.remove_phone("3333333333")
+    print(john_record)
 
-book = AddressBook()
+    book = AddressBook()
 
-book.add_record(john_record)
-book.add_record(jane_record)
-john = book.find("John")
-print(john)
+    book.add_record(john_record)
+    book.add_record(jane_record)
+    john = book.find("John")
+    print(john)
 
-upcoming_bdays = book.get_upcoming_birthdays()
-print(f"upcoming_bdays are {upcoming_bdays}")
+    upcoming_bdays = book.get_upcoming_birthdays()
+    print(f"upcoming_bdays are {upcoming_bdays}")
 
-for name, record in book.data.items():
-    print(record)
+    for name, record in book.data.items():
+        print(record)
 
-book.delete("John")
+    book.delete("John")
 
-for name, record in book.data.items():
-    print(record)
+    for name, record in book.data.items():
+        print(record)
+
+if __name__ == "__main__":
+    main()
