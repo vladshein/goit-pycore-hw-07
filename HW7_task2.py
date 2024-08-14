@@ -1,6 +1,7 @@
 #HW7 task2
 import os
 from HW7_task1 import AddressBook, Record, Birthday
+from prompt_toolkit import print_formatted_text as print
 
 #decorator to work with incorrect input
 def input_error(func):
